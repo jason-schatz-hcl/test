@@ -1,0 +1,4 @@
+stage ('Build') {
+    checkout scm
+    println('Building it!!!')
+}
