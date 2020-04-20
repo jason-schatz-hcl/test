@@ -1,4 +1,6 @@
-stage ('Build') {
-    checkout scm
-    println('Building it!!!')
+node('master') {
+    stage ('Build') {
+        checkout scm
+        println('Building it!!!')
+    }
 }
