@@ -2,7 +2,7 @@ node('master') {
     stage ('Build') {
         checkout scm
         println('Building it!!!')
-        sleep(30)
+        sleep(15)
     }
     stage ('Step2') {
         checkout scm
