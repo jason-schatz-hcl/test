@@ -1,0 +1,15 @@
+node('master') {
+    stage ('Pull artifacts') {
+        checkout scm
+        println('Pulling files')
+        sleep(5)
+    }
+    stage ('Uncompress') {
+        println('Uncompressing files')
+        sleep(5)
+    }
+    stage ('Publish Success') {
+        println('Publishing it!!!')
+        sleep(5)
+    }
+}
