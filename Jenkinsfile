@@ -1,6 +1,7 @@
 properties([
     parameters([
-        booleanParam(name: 'failBuild', defaultValue: false, description: 'fail the build for testing')
+        booleanParam(name: 'failBuild', defaultValue: false, description: 'fail the build for testing'),
+        booleanParam(name: 'unstableBuild', defaultValue: false, description: 'mark the build as unstable')
     ])
 ])
 
@@ -11,6 +12,9 @@ node('master') {
         sleep(5)
         if (params.failBuild) {
             error('Got an error building.')
+        }
+        if (params.unstableBuild) {
+            currentBuild.result = hudson.model.Result.UNSTABLE.toString()
         }
     }
     stage ('Step2') {
