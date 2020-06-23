@@ -2,6 +2,7 @@ properties([
     parameters([
         booleanParam(name: 'failBuild', defaultValue: false, description: 'fail the build for testing'),
         booleanParam(name: 'unstableBuild', defaultValue: false, description: 'mark the build as unstable'),
+        booleanParam(name: 'longWait', defaultValue: false, description: 'have the deploy wait a long time'),
         stringParam(name: 'commitId', defaultValue: '', description: 'the commit that was built.')
     ])
 ])
@@ -10,7 +11,11 @@ node('master') {
     stage ('Pull artifacts') {
         checkout scm
         println('Pulling files')
-        sleep(5)
+        if (params.longWait) {
+            sleep(5)
+        } else {
+            sleep(5000)
+        }
         if (params.failBuild) {
             error('Got an error building.')
         }
