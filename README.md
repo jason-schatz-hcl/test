@@ -3,3 +3,5 @@ more stuffs
 adding even more stuff
 even more awesome stuffs gonna be great
 hello is it me your waiting for?
+
+This change is happening in master.
