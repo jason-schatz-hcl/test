@@ -38,7 +38,7 @@ node('master') {
                 startTime: "${currentBuild.startTimeInMillis}",
                 endTime: "${System.currentTimeMillis()}",
                 requestor: "Jenkins",
-                revision: "${commit}",
+                revision: "crap",
                 status: "${status}",
                 tenantId: "5ade13625558f2c6688d15ce",
                 versionName: "${currentBuild.displayName}"
