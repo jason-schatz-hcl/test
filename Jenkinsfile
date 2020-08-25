@@ -37,7 +37,7 @@ node('master') {
                 appName: 'test2',
                 startTime: "${currentBuild.startTimeInMillis}",
                 endTime: "${System.currentTimeMillis()}",
-                requestor: "${committer}",
+                requestor: "Jenkins",
                 revision: "${commit}",
                 status: "${status}",
                 tenantId: "5ade13625558f2c6688d15ce",
