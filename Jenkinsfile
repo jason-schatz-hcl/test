@@ -34,7 +34,7 @@ node('master') {
                 fatal: false,
                 id: "${currentBuild.displayName}",
                 name: "${currentBuild.displayName}",
-                appName: 'test2',
+                appId: 'f7d227e6-5b30-4dd2-9c48-3cd54192fba1',
                 startTime: "${currentBuild.startTimeInMillis}",
                 endTime: "${System.currentTimeMillis()}",
                 requestor: "Jenkins",
