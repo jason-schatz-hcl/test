@@ -41,7 +41,10 @@ node('master') {
         println('envName: ' + envName)
         println('envId: ' + envId)
         sleep(5)
+        causes = null
+        cause = null
         //if (uploadDeploy) {
+                console.log('gonna upload the deployment')
                 step([
                     $class: 'UploadDeployment',
                     debug: true,
