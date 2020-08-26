@@ -36,13 +36,14 @@ node('master') {
         println('causes:' + causes.size())
         def cause = causes.get(0)
         println('cause: ' + cause)
-        println('cause: ' + cause.getClass().getName())
-        println('cause: ' + cause.toString())
         println('cause: ' + cause.getReturnProps())
-        println('cause: ' + cause.getReturnProps().get('versionName'))
-        println('cause: ' + cause.getReturnProps().get('versionId'))
-        println('cause: ' + cause.getReturnProps().get('envName'))
-        println('cause: ' + cause.getReturnProps().get('envId'))
+        def returnProps = cause.getReturnProps()
+        def versionName = returnProps.get('versionName')
+        def envId = returnProps.get('envId')
+        def envName = returnProps.get('envName')
+        println('versionName: ' + versionName)
+        println('envName: ' + envName)
+        println('envId: ' + envId)
         sleep(5)
         if (uploadDeploy) {
                 step([
@@ -51,17 +52,17 @@ node('master') {
                     fatal: false,
                     name: 'Deploy It',
                     appId: 'f7d227e6-5b30-4dd2-9c48-3cd54192fba1',
-                    description: "${version}-${env.BUILD_ID} to ${envName}",
+                    description: "${versionName}-${env.BUILD_ID} to ${envName}",
                     startTime: "${currentBuild.startTimeInMillis}",
                     endTime: "${System.currentTimeMillis()}",
                     environmentId: "${envId}",
                     environmentName: "${envName}",
-                    initiator: "${username}",
-                    result: "${status}",
-                    tenantId: "${VELOCITY_DOG_FOOD_TENANT}",
+                    initiator: "Jenkins",
+                    result: "success",
+                    tenantId: "5ade13625558f2c6688d15ce",
                     type: 'Jenkins',
-                    versionExtId: "${version}",
-                    versionName: "${version}"
+                    versionExtId: "${versionName}",
+                    versionName: "${versionName}"
                 ]) 
         }
     }
