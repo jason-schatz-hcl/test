@@ -34,6 +34,7 @@ node('master') {
         def cause = currentBuild.getBuildCauses('com.ibm.devops.connect.CloudCause')[0]
         println('cause: ' + cause)
         println('cause: ' + cause.getClass().getName())
+        println('cause: ' + cause.toString())
         println('cause: ' + cause.getReturnProps())
         println('cause: ' + cause.getReturnProps().get('versionName'))
         println('cause: ' + cause.getReturnProps().get('versionId'))
