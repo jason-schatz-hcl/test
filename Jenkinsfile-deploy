@@ -13,7 +13,8 @@ node('master') {
         checkout scm
         println('Pulling files')
         if (params.longWait) {
-            sleep(5000)
+            //sleep(5000)
+            sleep(5)
         } else {
             sleep(5)
         }
