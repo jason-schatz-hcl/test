@@ -31,7 +31,10 @@ node('master') {
     }
     stage ('Publish Success') {
         println('Publishing it!!!')
-        def cause = currentBuild.rawBuild.getBuildCauses('com.ibm.devops.connect.CloudCause')[0]
+        def causes = currentBuild.rawBuild.getCauses()
+        println('causes:' + causes.toString())
+        println('causes:' + causes.size())
+        def cause = causes.get(0)
         println('cause: ' + cause)
         println('cause: ' + cause.getClass().getName())
         println('cause: ' + cause.toString())
