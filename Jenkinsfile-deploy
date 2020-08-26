@@ -1,5 +1,6 @@
 properties([
     parameters([
+        booleanParam(name: 'uploadDeploy', defaultValue: false, description: 'fail the build for testing'),
         booleanParam(name: 'failBuild', defaultValue: false, description: 'fail the build for testing'),
         booleanParam(name: 'unstableBuild', defaultValue: false, description: 'mark the build as unstable'),
         booleanParam(name: 'longWait', defaultValue: false, description: 'have the deploy wait a long time'),
@@ -12,9 +13,9 @@ node('master') {
         checkout scm
         println('Pulling files')
         if (params.longWait) {
-            sleep(5)
-        } else {
             sleep(5000)
+        } else {
+            sleep(5)
         }
         if (params.failBuild) {
             error('Got an error building.')
@@ -29,6 +30,29 @@ node('master') {
     }
     stage ('Publish Success') {
         println('Publishing it!!!')
+        def cause = currentBuild.getBuildCauses('com.ibm.devops.connect.CloudCause')
+        println('cause: ' + cause)
+        println('cause: ' + cause.getReturnProps())
         sleep(5)
+        if (uploadDeploy) {
+                step([
+                    $class: 'UploadDeployment',
+                    debug: true,
+                    fatal: false,
+                    name: 'Deploy It',
+                    appId: 'f7d227e6-5b30-4dd2-9c48-3cd54192fba1',
+                    description: "${version}-${env.BUILD_ID} to ${envName}",
+                    startTime: "${currentBuild.startTimeInMillis}",
+                    endTime: "${System.currentTimeMillis()}",
+                    environmentId: "${envId}",
+                    environmentName: "${envName}",
+                    initiator: "${username}",
+                    result: "${status}",
+                    tenantId: "${VELOCITY_DOG_FOOD_TENANT}",
+                    type: 'Jenkins',
+                    versionExtId: "${version}",
+                    versionName: "${version}"
+                ]) 
+        }
     }
 }
