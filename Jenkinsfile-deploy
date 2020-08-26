@@ -32,11 +32,7 @@ node('master') {
     stage ('Publish Success') {
         println('Publishing it!!!')
         def causes = currentBuild.rawBuild.getCauses()
-        println('causes:' + causes.toString())
-        println('causes:' + causes.size())
         def cause = causes.get(0)
-        println('cause: ' + cause)
-        println('cause: ' + cause.getReturnProps())
         def returnProps = cause.getReturnProps()
         def versionName = returnProps.get('versionName')
         def envId = returnProps.get('envId')
@@ -45,7 +41,7 @@ node('master') {
         println('envName: ' + envName)
         println('envId: ' + envId)
         sleep(5)
-        if (uploadDeploy) {
+        //if (uploadDeploy) {
                 step([
                     $class: 'UploadDeployment',
                     debug: true,
@@ -64,6 +60,6 @@ node('master') {
                     versionExtId: "${versionName}",
                     versionName: "${versionName}"
                 ]) 
-        }
+        //}
     }
 }
