@@ -44,7 +44,7 @@ node('master') {
         println('no sleeping!')
         causes = null
         cause = null
-                console.log('gonna upload the deployment')
+                println('gonna upload the deployment')
                 step([
                     $class: 'UploadDeployment',
                     debug: true,
