@@ -31,9 +31,13 @@ node('master') {
     }
     stage ('Publish Success') {
         println('Publishing it!!!')
-        def cause = currentBuild.getBuildCauses('com.ibm.devops.connect.CloudCause')
+        def cause = currentBuild.getBuildCauses('com.ibm.devops.connect.CloudCause')[0]
         println('cause: ' + cause)
         println('cause: ' + cause.getReturnProps())
+        println('cause: ' + cause.getReturnProps().get('versionName'))
+        println('cause: ' + cause.getReturnProps().get('versionId'))
+        println('cause: ' + cause.getReturnProps().get('envName'))
+        println('cause: ' + cause.getReturnProps().get('envId'))
         sleep(5)
         if (uploadDeploy) {
                 step([
