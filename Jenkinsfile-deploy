@@ -40,10 +40,10 @@ node('master') {
         println('versionName: ' + versionName)
         println('envName: ' + envName)
         println('envId: ' + envId)
-        sleep(5)
+        // sleep(5)
+        println('no sleeping!')
         causes = null
         cause = null
-        //if (uploadDeploy) {
                 console.log('gonna upload the deployment')
                 step([
                     $class: 'UploadDeployment',
@@ -63,6 +63,5 @@ node('master') {
                     versionExtId: "${versionName}",
                     versionName: "${versionName}"
                 ]) 
-        //}
     }
 }
